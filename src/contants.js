@@ -1,0 +1,36 @@
+export const ActionTypes={
+
+/////////////////////////////////////////
+/////// Admin ActionTypes  지정
+
+
+/**
+ *  @인증 
+ */
+
+GET_TOKEN:'GET_TOKEN',
+GET_TOKEN_FAIL:'GET_TOKEN_FAIL',
+GET_TOKEN_SUCCESS:'GET_TOKEN_SUCCESS',
+
+REFRESH_TOKEN: 'REFRESH_TOKEN',
+REFRESH_TOKEN_FAIL: 'REFRESH_TOKEN_FAIL',
+REFRESH_TOKEN_SUCCESS: 'REFRESH_TOKEN_SUCCESS',
+
+/**
+ *  @로그인
+ */
+
+LOGIN:'LOGIN',
+LOGIN_FAIL:'LOGIN_FAIL',
+LOGIN_SUCCESS:'LOGIN_SUCCESS',
+
+LOGOUT:'LOGOUT',
+
+GET_USERME:'GET_USERME',
+GET_USERME_SUCCESS:'GET_USERME_SUCCESS',
+
+/**
+ * 
+ */
+
+}
