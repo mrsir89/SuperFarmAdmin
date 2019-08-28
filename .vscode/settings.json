@@ -1,0 +1,37 @@
+{
+  // The number of spaces a tab is equal to. This setting is overridden based on the file contents when `editor.detectIndentation` is on.
+  "editor.tabSize": 4,
+
+  // Overrides editor colors and font style from the currently selected color theme.
+  "editor.tokenColorCustomizations": {},
+
+  // Remove trailing auto inserted whitespace.
+  "editor.trimAutoWhitespace": true,
+
+  // Inserting and deleting whitespace follows tab stops.
+  "editor.useTabStops": true,
+
+  // Configure editor settings to be overridden for [css] language.
+  "[css]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+
+  // Configure editor settings to be overridden for [html] language.
+  "[html]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+
+  // Configure editor settings to be overridden for [javascript] language.
+  "[javascript]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+
+  // Configure editor settings to be overridden for [json] language.
+  "[json]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  }
+}
