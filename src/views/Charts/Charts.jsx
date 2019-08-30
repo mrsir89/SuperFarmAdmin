@@ -38,14 +38,72 @@ import {
 import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
 
 import {
-  chartsLine1,
+  // chartsLine1,
   chartsLine2,
   chartsBar1,
   chartsBar2
 } from "variables/charts";
 
+
+import ChartData from "chartData/ChartData.jsx"
+
+//const initialData = ChartData();
+
+// const updateGraphData = (newData) => {
+//   return {
+//     ...initialData,
+//     data: {
+//       ... initialData.data,
+//       dataSets: {
+//         ...initialData.data.dataSets,
+//         data: newData
+//       }
+//     }
+//   }
+// };
+
+/*
+{
+  data: {
+    dataset: {
+      data: []
+    }
+  },
+  options: {}
+}
+*/
+
+
 class Charts extends React.Component {
+  constructor(){
+    super();
+    this.state = {
+      chartData : ChartData(),
+      dataStandard : [
+         {name :"standard 1" , value: [10, 20, 30, 40, 530, 453, 380, 434, 568, 610, 700, 630]},
+         {name :"standard 2" , value: [50, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 630]},
+         {name :"standard 3" , value: [100, 0, 10, 550, 530, 453, 30, 434, 568, 40, 700, 630]},
+        
+      ]
+    }
+    console.log('charts >> ', ChartData());
+  }
+
+  updateChart(e, index) {
+    e.preventDefault();
+
+    const { dataStandard } = this.state;
+    const newValue = dataStandard[index].value;
+    console.log('updateChart >> ', ChartData(newValue));
+
+    this.setState({
+      chartData: ChartData(newValue)
+    });
+  }
+
+  
   render() {
+    const { chartData } = this.state;
     return (
       <>
         <PanelHeader
@@ -96,10 +154,11 @@ class Charts extends React.Component {
                     >
                       <i className="now-ui-icons loader_gear" />
                     </DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem>Action</DropdownItem>
-                      <DropdownItem>Another Action</DropdownItem>
-                      <DropdownItem>Something else here</DropdownItem>
+                    <DropdownMenu >
+                      {this.state.dataStandard.map((item,index) => {
+                        return <DropdownItem onClick={e => this.updateChart(e, index)} key={index}>{item.name}</DropdownItem>
+                      })}
+                       
                       <DropdownItem className="text-danger">
                         Remove data
                       </DropdownItem>
@@ -109,8 +168,10 @@ class Charts extends React.Component {
                 <CardBody>
                   <div className="chart-area">
                     <Line
-                      data={chartsLine1.data}
-                      options={chartsLine1.options}
+                      // data={chartsLine1.data}
+                      // options={chartsLine1.options}
+                      data={chartData.data}     // state에서 꺼내오기 
+                      options={chartData.options}
                     />
                   </div>
                 </CardBody>
@@ -147,10 +208,10 @@ class Charts extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
-                    <Line
+                    {/* <Line
                       data={chartsLine2.data}
                       options={chartsLine2.options}
-                    />
+                    /> */}
                   </div>
                 </CardBody>
                 <CardFooter>
@@ -162,6 +223,8 @@ class Charts extends React.Component {
               </Card>
             </Col>
           </Row>
+
+
           <Row>
             <Col xs={12} md={5} className="ml-auto">
               <Card className="card-chart">
@@ -170,10 +233,27 @@ class Charts extends React.Component {
                     Simple With Grids And Numbers
                   </h5>
                   <CardTitle tag="h4">Bar Chart</CardTitle>
+                  <UncontrolledDropdown>
+                    <DropdownToggle
+                      className="btn-round btn-icon"
+                      color="default"
+                      outline
+                    >
+                      <i className="now-ui-icons loader_gear" />
+                    </DropdownToggle>
+                    <DropdownMenu>
+                    {this.state.dataStandard.map((item,index) => {
+                        return <DropdownItem onClick={e => this.updateChart(e, index)} key={index}>{item.name}</DropdownItem>
+                      })}
+                      <DropdownItem className="text-danger">
+                        Remove data
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
-                    <Bar data={chartsBar1.data} options={chartsBar1.options} />
+                    <Bar data={chartData.data}  options={chartData.data}  />
                   </div>
                 </CardBody>
                 <CardFooter>
@@ -183,15 +263,36 @@ class Charts extends React.Component {
                 </CardFooter>
               </Card>
             </Col>
+
+
+
+
             <Col xs={12} md={5} className="mr-auto">
               <Card className="card-chart">
                 <CardHeader>
                   <h5 className="card-category">Multiple Bars No Gradient</h5>
                   <CardTitle tag="h4">Bar Chart 2</CardTitle>
+                  <UncontrolledDropdown>
+                    <DropdownToggle
+                      className="btn-round btn-icon"
+                      color="default"
+                      outline
+                    >
+                      <i className="now-ui-icons loader_gear" />
+                    </DropdownToggle>
+                    <DropdownMenu>
+                    {this.state.dataStandard.map((item,index) => {
+                        return <DropdownItem onClick={e => this.updateChart(e, index)} key={index}>{item.name}</DropdownItem>
+                      })}
+                      <DropdownItem className="text-danger">
+                        Remove data
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
-                    <Bar data={chartsBar2.data} options={chartsBar2.options} />
+                    <Bar data={chartData.data} options={chartData.options} />
                   </div>
                 </CardBody>
                 <CardFooter>
@@ -209,3 +310,6 @@ class Charts extends React.Component {
 }
 
 export default Charts;
+
+
+// onClick={this._updateGraphData(item.value)}

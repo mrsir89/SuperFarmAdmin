@@ -1,3 +1,6 @@
+//  import React, {Component, useState, useEffect} from 'react';
+//  import axios from "axios";  // http 라이브러리 
+
 /*!
 
 =========================================================
@@ -179,7 +182,7 @@ const dashboardPanelChart = {
           fill: true,
           backgroundColor: gradientFill,
           borderWidth: 2,
-          data: [50, 150, 100, 190, 130, 90, 150, 160, 120, 140, 190, 95]
+          data: [100, 150, 100, 190, 130, 90, 150, 160, 120, 140, 190, 95]
         }
       ]
     };
@@ -381,8 +384,36 @@ const dashboardActiveCountriesCard = {
 // // // Charts view - Line Chart - Card
 // #############################
 
+// const useData =(url) => {
+//   const defaultData = [542, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 630];
+//   const {data,setData} = useState(defaultData);
+
+//   // const callApi = async() => {
+//   //   const {data} = await axios.get(url)   // 후에 action으로 변경
+//   //   setData(data);
+//   // }
+
+//   // useEffect (() => {
+//   //   callApi();
+//   // })
+
+//   // 위 두 함수를 합쳐도 될 듯 
+//   uesEffect (() => {
+//      dispatch(Action).then(response => setData(response.data)) 
+//   })
+
+//   return {data, setData}
+
+// }
+
+// key와 value로 이루어짐 
 const chartsLine1 = {
+  //const standard = useData(url);
+
   data: canvas => {
+   // const standard = useData(url);      // url : 호출하고 싶은  api 주소 
+
+    ////////////////////////////////////////////////////////////
     var ctx = canvas.getContext("2d");
     var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
     gradientStroke.addColorStop(0, "#80b6f4");
@@ -390,20 +421,21 @@ const chartsLine1 = {
     var gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
     gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
     gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
+    
     return {
       labels: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
+        "1월",
+        "2월",
+        "3월",
+        "4월",
+        "5월",
+        "6월",
+        "7월",
+        "8월",
+        "9월",
+        "10월",
+        "11월",
+        "12월"
       ],
       datasets: [
         {
@@ -418,7 +450,7 @@ const chartsLine1 = {
           fill: true,
           backgroundColor: gradientFill,
           borderWidth: 2,
-          data: [542, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 630]
+          data: [542, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 630]    // standard.data
         }
       ]
     };
@@ -429,8 +461,9 @@ const chartsLine1 = {
 // ##############################
 // // // Charts view - Line Chart 2 - Card
 // #############################
-
+// 검색기준 : 
 const chartsLine2 = {
+
   data: canvas => {
     var ctx = canvas.getContext("2d");
     var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
