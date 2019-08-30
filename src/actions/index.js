@@ -1,6 +1,32 @@
 import { ActionTypes } from '../contants';
 
 /**
+ * 회원가입 
+ * 
+ */
+//------------------------------------------------
+ const signup = (signupAdmin,history) => {
+   console.log(signupAdmin, '여기는 sign up')
+
+   return ({
+     type: ActionTypes.SIGNUP,
+     payload: {
+       request: {
+         method: 'POST',
+         url: '/signup',
+         headers: {
+           'Content-Type' : 'application/json; charset: utf-8'
+         },
+         data: JSON.stringify()//signUp -> DB 
+       }
+     }
+   }
+   );
+ };
+
+
+
+/**
  * Admin 페이지 Action 정의 
  */
 
@@ -87,6 +113,6 @@ const login = (customerId, password) => {
 
 
 export const Actions ={
-    getClientToken,refreshToken,login, logout,getUserMe // login과 인증
+  signup,getClientToken,refreshToken,login, logout,getUserMe // login과 인증
     
 }

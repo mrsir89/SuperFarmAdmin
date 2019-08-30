@@ -41,6 +41,7 @@ import RTL from "views/Pages/RTL.jsx";
 import PricingPage from "views/Pages/PricingPage.jsx";
 import LoginPage from "views/Pages/LoginPage.jsx";
 import RegisterPage from "views/Pages/RegisterPage.jsx";
+import Signup from "views/Pages/Signup.jsx"
 import LockScreenPage from "views/Pages/LockScreenPage.jsx";
 
 let routes = [
@@ -95,6 +96,15 @@ let routes = [
         component: LoginPage,
         layout: ""
       },
+
+      {
+        path:"/signup",
+        name:"Signup Page",
+        short:"Signup",
+        mini:"SU",
+        component: Signup,
+        layout: ""
+      }
       // {
       //   path: "/pricing-page",
       //   name: "Pricing Page",

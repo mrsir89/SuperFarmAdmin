@@ -32,6 +32,7 @@ import AdminLayout from "layouts/Admin.jsx";
 import AuthLayout from "layouts/Auth.jsx";
 
 import Login from './views/Pages/Login'; // 8/27
+import Signup from './views/Pages/Signup';
 
 import "bootstrap/dist/css/bootstrap.css";
 import "assets/scss/now-ui-dashboard.scss?v=1.3.0";
@@ -105,6 +106,7 @@ ReactDOM.render(
 
       {/* 8/27 */}
       <Route path="/login" component={Login} />
+      <Route path="/signup" component ={Signup}/>
 
       <Redirect to="/admin/dashboard" />
     </Switch>
