@@ -51,13 +51,13 @@ let routes = [
     component: Dashboard,
     layout: "/admin"
   },
-  {
-    collapse: true,
-    path: "/pages",
-    name: "Pages",
-    state: "openPages",
-    icon: "now-ui-icons design_image",
-    views: [
+  // {
+  //   collapse: true,
+  //   path: "/pages",
+  //   name: "Pages",
+  //   state: "openPages",
+  //   icon: "now-ui-icons design_image",
+  //   views: [
       // {
       //   path: "/timeline-page",
       //   name: "Timeline Page",
@@ -79,22 +79,22 @@ let routes = [
       //   component: RTL,
       //   layout: "/admin"
       // },
-      {
-        path: "/register-page",
-        name: "Register Page",
-        short: "Register",
-        mini: "RP",
-        component: RegisterPage,
-        layout: "/auth"
-      },
-      {
-        path: "/login-page",
-        name: "Login Page",
-        short: "Login",
-        mini: "LP",
-        component: LoginPage,
-        layout: "/auth"
-      },
+      // {
+      //   path: "/register-page",
+      //   name: "Register Page",
+      //   short: "Register",
+      //   mini: "RP",
+      //   component: RegisterPage,
+      //   layout: "/auth"
+      // },
+      // {
+      //   path: "/login-page",
+      //   name: "Login Page",
+      //   short: "Login",
+      //   mini: "LP",
+      //   component: LoginPage,
+      //   layout: "/auth"
+      // },
       // {
       //   path: "/pricing-page",
       //   name: "Pricing Page",
@@ -111,8 +111,8 @@ let routes = [
       //   component: LockScreenPage,
       //   layout: "/auth"
       // }
-    ]
-  },
+  //   ]
+  // },
   // {
   //   collapse: true,
   //   path: "/components",
@@ -171,20 +171,20 @@ let routes = [
   //     }
   //   ]
   // },
-  {
-    collapse: true,
-    path: "/forms",
-    name: "Forms",
-    state: "openForms",
-    icon: "now-ui-icons design_bullet-list-67",
-    views: [
-      {
-        path: "/regular-forms",
-        name: "Regular Forms",
-        mini: "RF",
-        component: RegularForms,
-        layout: "/admin"
-      },
+  // {
+  //   collapse: true,
+  //   path: "/forms",
+  //   name: "Forms",
+  //   state: "openForms",
+  //   icon: "now-ui-icons design_bullet-list-67",
+  //   views: [
+  //     {
+  //       path: "/regular-forms",
+  //       name: "Regular Forms",
+  //       mini: "RF",
+  //       component: RegularForms,
+  //       layout: "/admin"
+  //     },
       // {
       //   path: "/extended-forms",
       //   name: "Extended Forms",
@@ -192,22 +192,22 @@ let routes = [
       //   component: ExtendedForms,
       //   layout: "/admin"
       // },
-      {
-        path: "/validation-forms",
-        name: "Validation Forms",
-        mini: "VF",
-        component: ValidationForms,
-        layout: "/admin"
-      },
-      {
-        path: "/wizard",
-        name: "Wizard",
-        mini: "W",
-        component: Wizard,
-        layout: "/admin"
-      }
-    ]
-  },
+      // {
+      //   path: "/validation-forms",
+      //   name: "Validation Forms",
+      //   mini: "VF",
+      //   component: ValidationForms,
+      //   layout: "/admin"
+      // },
+      // {
+      //   path: "/wizard",
+      //   name: "Wizard",
+      //   mini: "W",
+      //   component: Wizard,
+      //   layout: "/admin"
+      // }
+  //   ]
+  // },
   // {
   //   collapse: true,
   //   path: "/tables",
@@ -218,7 +218,7 @@ let routes = [
       {
         path: "/regular-tables",
         name: "Regular Tables",
-        mini: "RT",
+        icon: "now-ui-icons files_single-copy-04",
         component: RegularTables,
         layout: "/admin"
       // }////////////////////////////////////////////////////////////
