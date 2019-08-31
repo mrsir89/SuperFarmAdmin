@@ -15,6 +15,9 @@
 
 */
 import React from "react";
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { Actions } from '../../actions/index';
 
 // reactstrap components
 import {
@@ -38,11 +41,51 @@ import {
 
 // core components
 import bgImage from "assets/img/bg16.jpg";
+import { ActionTypes } from "contants";
+
+
+const ResisterAsync = (signupAdmin, history) => dispatch => {
+  return dispatch(Actions.getClientToekn())
+  .then (response => {
+      if (response.type == ActionTypes.GET_TOKEN_SUCCESS){
+          console.log ('dispatch signupAsync ActionTypes.GET_TOKEN_SUCCESS')
+          return dispatch (Actions.signup(signupAdmin, history)).then(response => {
+              history.push("/")
+          })
+      }else {
+          return Promise.reject(response);
+      }
+  }).catch (error => {
+      alert('서버와의 통신 중 오류')
+      return history.push ("/signup")
+  });
+};
+
 
 class RegisterPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      id: '',
+      password:'',
+    //  passwordOrigin:'',
+   //   passwordCheck:'',
+     // passwordComent: '비밀번호를 입력해 주세요',
+      name: '',
+    //  email:'',
+    //  emailComent:'email을 입력하세요',
+     idCheck: false,
+    //  passwordCheck: false,
+    //  emailChecl: false 
+    };
+
+    this._handleInputChange = this._handleInputChange.bind(this);
+    this._signupSubmit = this._signupSubmit.bind(this);
+    this._idCheckChange = this._idCheckChange.bind(this);
+  //  this._passwordCheck = this._passwordCheck.bind(this);
+   // this._passwordOrigin = this._passwordOrigin.bind(this);
+   // this._emailCheck = this._emailCheck.bind(this);
+   // this.routeChange = this.routeChange.bind(this);
   }
   componentDidMount() {
     document.body.classList.add("register-page");
@@ -50,6 +93,103 @@ class RegisterPage extends React.Component {
   componentWillUnmount() {
     document.body.classList.remove("register-page");
   }
+
+  _handleInputChange(event){
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    value.trim() 
+    console.log (target, '   :target')
+    console.log (value, '  :value')
+    console.log(name, '   :name')
+
+
+    this.setState({
+        [name]:value
+    });
+    console.log(this.state)
+
+  }
+
+  _idCheckChange = (event) => {
+      console.log ('아이디바뀜', event.target)
+      let id = ''
+      id = event.target.value;
+      id.trim();
+      const {idCheck} = this.props;
+      console.log (id)
+      if(id.length > 3) {
+          console.log(id.length)
+          idCheck(id).then(response =>{
+              console.log(response, ' idCheck 확인 ~~~~~~~~')
+              if(response.type ===ActionTypes.IDCHECK_SUCCESS){
+                  this.setState({
+                      id:id,
+                      idCheck:true,
+                      idCheckStatus:'사용가능한 아이디입니다'
+                  })
+                  return 
+              } else if (response.type=== ActionTypes.IDCHECK_FAIL){
+                  this.setState({
+                      id:{
+                          value:''
+                      },
+                      idCheck:false,
+                      idCheckStatus:'사용 불가능한 아이디입니다'
+                  })
+              }
+          }).catch(error => {
+              console.log(error, ' error 확인 ')
+              this.setState({
+                id: {
+                  value: ''
+                },
+                idCheck: false,
+                idCheckStatus: '사용 불가능한 아이디 입니다.'
+              })
+            })
+          } else {
+            this.setState({
+              idCheckStatus: '입력하신 아이디가 짧습니다.',
+              idCheck: false
+            })
+          }
+          console.log('Id change 확인중 ', this.state)
+        }
+
+  _signupSubmit(e) {
+    e.preventDefault();
+    console.log('submit 실행 합니다.')
+    let checkId = this.state.idCheck;
+    let checkpwd = this.state.passwordCheck;
+    let checkemail = this.state.emailCheck;
+    console.log('sumbit의 state.',this.state)
+    if (checkpwd !== false && checkId !== false && checkemail !== false) {
+      if (this.state.userId !== null && this.state.userId !==''
+          &&this.state.name !=='' && this.state.phone !=='') {
+
+        const signupAdmin = {
+          userId: this.state.id,
+          userName: this.state.name,
+          userPassword: this.state.passwordOrigin,
+          userEmail: this.state.email
+    
+        }
+        const { signup } = this.props;
+        const { history }= this.props;
+        signup(signupAdmin,history);
+
+      
+      }else{
+        alert('누락된 곳이 있습니다.')
+      }
+    }else {
+      alert(' 입력하지 않은 곳이 있습니다.')
+    }
+  };
+
+
+
   render() {
     return (
       <>
@@ -62,37 +202,8 @@ class RegisterPage extends React.Component {
                     <div className="icon icon-primary">
                       <i className="now-ui-icons media-2_sound-wave" />
                     </div>
-                    <div className="description">
-                      <h5 className="info-title">Marketing</h5>
-                      <p className="description">
-                        We've created the marketing campaign of the website. It
-                        was a very interesting collaboration.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="info-area info-horizontal">
-                    <div className="icon icon-primary">
-                      <i className="now-ui-icons media-1_button-pause" />
-                    </div>
-                    <div className="description">
-                      <h5 className="info-title">Fully Coded in React 16</h5>
-                      <p className="description">
-                        We've developed the website with React 16, HTML5 and
-                        CSS3. The client has access to the code using GitHub.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="info-area info-horizontal">
-                    <div className="icon icon-info">
-                      <i className="now-ui-icons users_single-02" />
-                    </div>
-                    <div className="description">
-                      <h5 className="info-title">Built Audience</h5>
-                      <p className="description">
-                        There is also a Fully Customizable CMS Admin Dashboard
-                        for this product.
-                      </p>
-                    </div>
+                    
+                    
                   </div>
                 </Col>
                 <Col lg={4} md={8} xs={12}>
@@ -126,13 +237,17 @@ class RegisterPage extends React.Component {
                           </InputGroupAddon>
                           <Input
                             type="text"
-                            placeholder="First Name..."
+                            name="id"
+                            placeholder="ID"
                             onFocus={e =>
                               this.setState({ firstnameFocus: true })
                             }
                             onBlur={e =>
                               this.setState({ firstnameFocus: false })
                             }
+                            onChange={this._handleInputChange.bind(this)}
+
+
                           />
                         </InputGroup>
                         <InputGroup
@@ -146,15 +261,13 @@ class RegisterPage extends React.Component {
                             </InputGroupText>
                           </InputGroupAddon>
                           <Input
-                            type="text"
-                            placeholder="Last Name..."
-                            onFocus={e =>
-                              this.setState({ lastnameFocus: true })
-                            }
-                            onBlur={e =>
-                              this.setState({ lastnameFocus: false })
-                            }
-                          />
+                            type="password"
+                            name= "password"
+                            placeholder="패스워드를 입력하세요"
+                            onChange={this._handleInputChange.bind(this)}
+                            //onChange={this._passwordCheck.bind(this)}
+                                         
+                           />
                         </InputGroup>
                         <InputGroup
                           className={
@@ -173,6 +286,28 @@ class RegisterPage extends React.Component {
                             onBlur={e => this.setState({ emailFocus: false })}
                           />
                         </InputGroup>
+
+                        <InputGroup
+                          className={
+                            this.state.emailFocus ? "input-group-focus" : ""
+                          }
+                        >
+                          <InputGroupAddon addonType="prepend">
+                            <InputGroupText>
+                             &nbsp;&nbsp;&nbsp;
+                            </InputGroupText>
+                          </InputGroupAddon>
+                          <Input
+                            type="select"
+                            placeholder="status"
+                            onFocus={e => this.setState({ emailFocus: true })}
+                            onBlur={e => this.setState({ emailFocus: false })}
+                          />
+                        </InputGroup>
+
+
+                        
+                        
                         <FormGroup check>
                           <Label check>
                             <Input type="checkbox" />
@@ -186,14 +321,16 @@ class RegisterPage extends React.Component {
                       </Form>
                     </CardBody>
                     <CardFooter className="text-center">
-                      <Button
-                        color="primary"
-                        size="lg"
-                        className="btn-round"
-                        href="#pablo"
-                      >
-                        Get Started
+                    <Button
+                      block
+                      color="primary"
+                      size="lg"
+                      href="#pablo"
+                      className="mb-3 btn-round"
+                      onClick={this._signupSubmit}>
+                       Get Started
                       </Button>
+                     
                     </CardFooter>
                   </Card>
                 </Col>
@@ -209,5 +346,15 @@ class RegisterPage extends React.Component {
     );
   }
 }
+const mapDispatchToProps = (dispatch) => (console.log('mapDispatchToProps', dispatch), {
+            
+  signup: (signupAdmin,history) => dispatch(ResisterAsync(signupAdmin,history)),
+ // idCheck: (id) => dispatch(Actions.idCheck(id)),
+ // emailCheck: (email) => dispatch(Actions.emailCheck(email)),
+  //asynAction: () => dispatch(Actions.asynAction())
+          
+});
 
-export default RegisterPage;
+export default connect(null, mapDispatchToProps)(RegisterPage);
+
+

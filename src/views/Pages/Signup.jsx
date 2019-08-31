@@ -48,24 +48,21 @@ class Signup extends React.Component {
         super(props); 
         this.state = {
             id: '',
-            passwordOrigin:'',
-            passwordCheck:'',
-            passwordComent: '비밀번호를 입력해 주세요',
+            password:'',
+          //  passwordOrigin:'',
+         //   passwordCheck:'',
+           // passwordComent: '비밀번호를 입력해 주세요',
             name: '',
-            birthday: '',
-            gender: '',
-            email:'',
-            address:'',
-            phone:'',
-            emailComent:'email을 입력하세요',
-            idCheck: false,
-            passwordCheck: false,
-            emailChecl: false 
+          //  email:'',
+          //  emailComent:'email을 입력하세요',
+         //  idCheck: false,
+          //  passwordCheck: false,
+          //  emailChecl: false 
         };
         this._handleInputChange = this._handleInputChange.bind(this);
         this._signupSubmit = this._signupSubmit.bind(this);
         this._idCheckChange = this._idCheckChange.bind(this);
-        this._passwordCheck = this._passwordCheck.bind(this);
+      //  this._passwordCheck = this._passwordCheck.bind(this);
         this._passwordOrigin = this._passwordOrigin.bind(this);
         this._emailCheck = this._emailCheck.bind(this);
         this.routeChange = this.routeChange.bind(this);
@@ -183,35 +180,35 @@ class Signup extends React.Component {
                 })
                 console.log('state 확인~!@!!!!!!!!!!!!!!!!!!!!!', this.state)
               }
-              _passwordCheck = (event) => {
+              // _passwordCheck = (event) => {
             
-                console.log(event.target)
-                const { asynAction } = this.props;
-                var password = event.target.value
-                password.trim()
-                console.log(this.props, 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz')
-                console.log(event.target.value, 'check target')
+              //   console.log(event.target)
+              //   const { asynAction } = this.props;
+              //   var password = event.target.value
+              //   password.trim()
+              //   console.log(this.props, 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz')
+              //   console.log(event.target.value, 'check target')
             
-                asynAction().then((response) => {
-                  console.log(response)
-                  this.setState({
-                    passwordCheck: password
-                  })
-                  if (this.state.passwordOrigin === this.state.passwordCheck) {
-                    this.setState({
-                      passwordComent: '비밀번호가 일치 합니다.',
-                      passwordCheck: true
-                    })
-                    console.log('password State', this.state)
-                  } else {
-                    this.setState({
-                      passwordComent: '비밀번호가 일치하지 않습니다.',
-                      passwordCheck: true
-                    })
-                  }
-                })
-                console.log('state 확인~!@!!!!!!!!!!!!!!!!!!!!!', this.state)
-              }
+              //   asynAction().then((response) => {
+              //     console.log(response)
+              //     this.setState({
+              //       passwordCheck: password
+              //     })
+              //     if (this.state.passwordOrigin === this.state.passwordCheck) {
+              //       this.setState({
+              //         passwordComent: '비밀번호가 일치 합니다.',
+              //         passwordCheck: true
+              //       })
+              //       console.log('password State', this.state)
+              //     } else {
+              //       this.setState({
+              //         passwordComent: '비밀번호가 일치하지 않습니다.',
+              //         passwordCheck: true
+              //       })
+              //     }
+              //   })
+              //   console.log('state 확인~!@!!!!!!!!!!!!!!!!!!!!!', this.state)
+              // }
             
               _emailCheck = (event) => {
                 var email = event.target.value;
@@ -265,14 +262,13 @@ class Signup extends React.Component {
               _signupSubmit(e) {
                 e.preventDefault();
                 console.log('submit 실행 합니다.')
-                let checkpwd = this.state.idCheck;
-                let checkId = this.state.passwordCheck;
+                let checkId = this.state.idCheck;
+                let checkpwd = this.state.passwordCheck;
                 let checkemail = this.state.emailCheck;
                 console.log('sumbit의 state.',this.state)
                 if (checkpwd !== false && checkId !== false && checkemail !== false) {
                   if (this.state.userId !== null && this.state.userId !==''
-                      &&this.state.name !=='' && this.state.birthday !=='' 
-                      &&this.state.address !=='' && this.state.phone !=='') {
+                      &&this.state.name !=='' && this.state.phone !=='') {
             
                     const signupAdmin = {
                       userId: this.state.id,
@@ -339,7 +335,8 @@ class Signup extends React.Component {
                                           placeholder="아이디를 입력하세요"
                                           onFocus={e => this.setState({ firstnameFocus: true })}
                                           onBlur={e => this.setState({ firstnameFocus: false })}
-                                          onChange={this._idCheckChange.bind(this)}
+                                          onChange={this._handleInputChange.bind(this)}
+                                          //onChange={this._idCheckChange.bind(this)}
                                         />
                                       </InputGroup>
                                       <InputGroup
@@ -355,10 +352,10 @@ class Signup extends React.Component {
                                         </InputGroupAddon>
                                         <Input
                                           type="password"
+                                          name= "password"
                                           placeholder="패스워드를 입력하세요"
-                                          onFocus={e => this.setState({ lastnameFocus: true })}
-                                          onBlur={e => this.setState({ lastnameFocus: false })}
-                                          onChange={this._passwordCheck.bind(this)}
+                                          onChange={this._handleInputChange.bind(this)}
+                                          //onChange={this._passwordCheck.bind(this)}
                                          
                                         />
                                        
@@ -371,15 +368,14 @@ class Signup extends React.Component {
                                       >
                                         <InputGroupAddon addonType="prepend">
                                           <InputGroupText>
-                                            <i className="now-ui-icons text_caps-small" />
+                                          &nbsp;
                                           </InputGroupText>
                                         </InputGroupAddon>
                                         <Input
                                           type="text"
+                                          name ="name"
                                           placeholder="이름을 입력해주세요"
-                                          onFocus={e => this.setState({ lastnameFocus: true })}
-                                          onBlur={e => this.setState({ lastnameFocus: false })}
-                                          onChange={this._handleInputChange.bind(this)}
+                                         onChange={this._handleInputChange.bind(this)}
                                          
                                         />
                                        
@@ -422,10 +418,10 @@ class Signup extends React.Component {
             }
     const mapDispatchToProps = (dispatch) => (console.log('mapDispatchToProps', dispatch), {
             
-    signup: (signupCustomer,history) => dispatch(signupAsync(signupCustomer,history)),
+    signup: (signupAdmin,history) => dispatch(signupAsync(signupAdmin,history)),
     idCheck: (id) => dispatch(Actions.idCheck(id)),
     emailCheck: (email) => dispatch(Actions.emailCheck(email)),
-    asynAction: () => dispatch(Actions.asynAction())
+    //asynAction: () => dispatch(Actions.asynAction())
             
 });
             

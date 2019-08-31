@@ -38,11 +38,13 @@ const authentication = (state = initialStateAuth, action) => {
                 ...state,
                 signupCustomer: payload.signupCustomer
             };
+
         case ActionTypes.LOGIN_SUCCESS:
             return {
                 ...state,
                 userDetails: payload.userDetails
             };
+        
         case ActionTypes.GET_USERME_SUCCESS:
             return {
                 ...state,

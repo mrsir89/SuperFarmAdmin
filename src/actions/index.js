@@ -24,6 +24,38 @@ import { ActionTypes } from '../contants';
    );
  };
 
+ const idCheck = (id) => {
+  console.log('idCheck 실행 ', id)
+
+  const formData = new FormData();
+  formData.append('id', id);
+  return ({
+    type: ActionTypes.IDCHECK,
+    payload: {
+      request: {
+        method: 'POST',
+        url: '/signup/idCheck',
+        data: formData
+      }
+    }
+  });
+};
+
+const emailCheck = (email) => {
+  const formData = new FormData();
+  formData.append('email', email);
+  return ({
+    type: ActionTypes.EMAILCHECK,
+    payload: {
+      request: {
+        method: 'POST',
+        url: '/signup/emailCheck',
+        data: formData
+      }
+    }
+  });
+}
+
 
 
 /**
@@ -113,6 +145,6 @@ const login = (customerId, password) => {
 
 
 export const Actions ={
-  signup,getClientToken,refreshToken,login, logout,getUserMe // login과 인증
+  signup, emailCheck, idCheck,getClientToken,refreshToken,login, logout,getUserMe // login과 인증
     
 }
