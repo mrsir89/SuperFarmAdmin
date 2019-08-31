@@ -274,19 +274,16 @@ class Signup extends React.Component {
                       &&this.state.name !=='' && this.state.birthday !=='' 
                       &&this.state.address !=='' && this.state.phone !=='') {
             
-                    const signupCustomer = {
+                    const signupAdmin = {
                       userId: this.state.id,
                       userName: this.state.name,
                       userPassword: this.state.passwordOrigin,
-                      userEmail: this.state.email,
-                      customerBirth: this.state.birthday,
-                      customerGender: this.state.gender,
-                      customerPhone: this.state.phone,
-                      customerAddr: this.state.address
+                      userEmail: this.state.email
+                
                     }
                     const { signup } = this.props;
                     const { history }= this.props;
-                    signup(signupCustomer,history);
+                    signup(signupAdmin,history);
             
                   
                   }else{
@@ -338,6 +335,7 @@ class Signup extends React.Component {
                                         </InputGroupAddon>
                                         <Input
                                           type="text"
+                                          name ="id"
                                           placeholder="아이디를 입력하세요"
                                           onFocus={e => this.setState({ firstnameFocus: true })}
                                           onBlur={e => this.setState({ firstnameFocus: false })}
