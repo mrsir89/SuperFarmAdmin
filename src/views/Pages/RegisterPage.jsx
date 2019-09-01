@@ -65,19 +65,13 @@ const ResisterAsync = (signupAdmin, history) => dispatch => {
 class RegisterPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      id: '',
-      password:'',
-    //  passwordOrigin:'',
-   //   passwordCheck:'',
-     // passwordComent: '비밀번호를 입력해 주세요',
-      name: '',
-    //  email:'',
-    //  emailComent:'email을 입력하세요',
-     idCheck: false,
-    //  passwordCheck: false,
-    //  emailChecl: false 
-    };
+    this.state =  {
+      id: "",
+      password: "",
+      email: "",
+      admin_authority:""
+     
+    }
 
     this._handleInputChange = this._handleInputChange.bind(this);
     this._signupSubmit = this._signupSubmit.bind(this);
@@ -170,9 +164,10 @@ class RegisterPage extends React.Component {
 
         const signupAdmin = {
           userId: this.state.id,
-          userName: this.state.name,
+         // userName: this.state.name,
           userPassword: this.state.passwordOrigin,
-          userEmail: this.state.email
+          userEmail: this.state.email,
+          userAutority: this.state.admin_authority
     
         }
         const { signup } = this.props;
@@ -189,6 +184,8 @@ class RegisterPage extends React.Component {
   };
 
 
+
+  
 
   render() {
     return (
@@ -211,16 +208,8 @@ class RegisterPage extends React.Component {
                     <CardHeader className="text-center">
                       <CardTitle tag="h4">Register</CardTitle>
                       <div className="social btns-mr-5">
-                        <Button className="btn-icon btn-round" color="twitter">
-                          <i className="fab fa-twitter" />
-                        </Button>
-                        <Button className="btn-icon btn-round" color="dribbble">
-                          <i className="fab fa-dribbble" />
-                        </Button>
-                        <Button className="btn-icon btn-round" color="facebook">
-                          <i className="fab fa-facebook-f" />
-                        </Button>
-                        <h5 className="card-description">or be classical</h5>
+                    
+                        
                       </div>
                     </CardHeader>
                     <CardBody>
@@ -281,9 +270,11 @@ class RegisterPage extends React.Component {
                           </InputGroupAddon>
                           <Input
                             type="email"
+                            name="email"
                             placeholder="Email..."
                             onFocus={e => this.setState({ emailFocus: true })}
                             onBlur={e => this.setState({ emailFocus: false })}
+                            onChange={this._handleInputChange.bind(this)}
                           />
                         </InputGroup>
 
@@ -294,30 +285,19 @@ class RegisterPage extends React.Component {
                         >
                           <InputGroupAddon addonType="prepend">
                             <InputGroupText>
-                             &nbsp;&nbsp;&nbsp;
+                             {/* &nbsp;&nbsp;&nbsp; */}
                             </InputGroupText>
                           </InputGroupAddon>
-                          <Input
-                            type="select"
-                            placeholder="status"
-                            onFocus={e => this.setState({ emailFocus: true })}
-                            onBlur={e => this.setState({ emailFocus: false })}
-                          />
-                        </InputGroup>
-
-
-                        
-                        
-                        <FormGroup check>
-                          <Label check>
-                            <Input type="checkbox" />
-                            <span className="form-check-sign" />
-                            <div>
-                              I agree to the{" "}
-                              <a href="#something">terms and conditions</a>.
-                            </div>
-                          </Label>
-                        </FormGroup>
+                          <Input type ="select"
+                          name="admin_authority" 
+                          onChange={this._handleInputChange.bind(this)}>
+                          <option > admin_authority</option>
+                          <option >관리자</option> 
+                          <option >MD</option> 
+                          <option >물류</option>
+                          <option >CS</option> 
+                           </Input>
+                          </InputGroup>        
                       </Form>
                     </CardBody>
                     <CardFooter className="text-center">
@@ -349,9 +329,9 @@ class RegisterPage extends React.Component {
 const mapDispatchToProps = (dispatch) => (console.log('mapDispatchToProps', dispatch), {
             
   signup: (signupAdmin,history) => dispatch(ResisterAsync(signupAdmin,history)),
- // idCheck: (id) => dispatch(Actions.idCheck(id)),
- // emailCheck: (email) => dispatch(Actions.emailCheck(email)),
-  //asynAction: () => dispatch(Actions.asynAction())
+  idCheck: (id) => dispatch(Actions.idCheck(id)),
+  emailCheck: (email) => dispatch(Actions.emailCheck(email)),
+  asynAction: () => dispatch(Actions.asynAction())
           
 });
 
