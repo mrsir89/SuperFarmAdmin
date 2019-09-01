@@ -93,8 +93,8 @@ class Calendar extends React.Component {
         <PanelHeader
           content={
             <div className="header text-center">
-              <h2 className="title">React Big Calendar</h2>
-              <p className="category">
+              <h2 className="title">Super Farm's Events</h2>
+              {/* <p className="category">
                 A beautiful react component made by{" "}
                 <a href="https://github.com/intljusticemission" target="_blank">
                   International Justice Mission
@@ -106,7 +106,7 @@ class Calendar extends React.Component {
                 >
                   full documentation.
                 </a>
-              </p>
+              </p> */}
             </div>
           }
         />

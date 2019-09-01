@@ -1,21 +1,18 @@
 /*!
-
 =========================================================
 * Now UI Dashboard PRO React - v1.3.0
 =========================================================
-
 * Product Page: https://www.creative-tim.com/product/now-ui-dashboard-pro-react
 * Copyright 2019 Creative Tim (https://www.creative-tim.com)
-
 * Coded by Creative Tim
-
 =========================================================
-
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 */
 import React from "react";
-
+import { Actions } from '../../actions/index';
+import { ActionTypes } from '../../contants';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 // reactstrap components
 import {
   Card,
@@ -37,16 +34,82 @@ import nowLogo from "assets/img/now-logo.png";
 
 import bgImage from "assets/img/bg14.jpg";
 
+const loginAsync = (customerId, password, history) => (dispatch) => {
+  console.log('loginAsynce 시작 ', customerId, password)
+  return dispatch(Actions.login(customerId, password))
+    .then(response => {
+      
+      if (response === undefined || response === null) {
+        alert(' 아이디 또는 비밀 번호가 잘못 되었습니다.')
+      
+        return history.push("/login")
+      
+      } else {
+        if (response.type === ActionTypes.LOGIN_SUCCESS) {
+      
+          return dispatch(Actions.getUserMe())
+      
+        } else {
+      
+          return alert('아이디 또는 비밀 번호가 잘못 되었습니다.');
+      
+        }
+      }
+    }).then(response => {
+      if (response.type === ActionTypes.GET_USERME_SUCCESS) {
+        alert(`${customerId} 님 접속을 환영 합니다.`)
+        return history.push("/")
+      
+      } else {
+        alert('회원 정보를 가져 오는데 실패 하였습니다. \n\n다시 시도해 주세요');
+        return dispatch(Actions.logout())
+      
+      }
+    }).catch(error => {
+      return console.log(' login Error', error)
+    });
+}
+
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      id:'',
+      password:''
+    };
   }
+
   componentDidMount() {
     document.body.classList.add("login-page");
   }
+
   componentWillUnmount() {
     document.body.classList.remove("login-page");
+  }
+
+  _loginStart=()=>{
+    const { login } = this.props
+    const { history } = this.props;
+    let id = this.state.id;
+    let password = this.state.password
+    login(id,password,history);
+  }
+
+  _idChange(event){
+    console.log(event.target,'idCange')
+    console.log(event.target.value)
+    this.setState({
+      id : event.target.value
+    })
+  }
+  _passwordChange(event){
+    console.log(event.target,'passwordChange')
+    console.log(event.target.value)
+    this.setState({
+      password : event.target.value
+    })
+    console.log(this.state,'this.State 확인 ')
   }
   render() {
     return (
@@ -82,9 +145,10 @@ class Login extends React.Component {
                             </InputGroupAddon>
                             <Input
                               type="text"
-                              placeholder="First Name..."
+                              placeholder="아이디를 입력하세요"
                               onFocus={e => this.setState({ firstnameFocus: true })}
                               onBlur={e => this.setState({ firstnameFocus: false })}
+                              onChange={this._idChange.bind(this)}
                             />
                           </InputGroup>
                           <InputGroup
@@ -99,10 +163,11 @@ class Login extends React.Component {
                               </InputGroupText>
                             </InputGroupAddon>
                             <Input
-                              type="text"
-                              placeholder="Last Name..."
+                              type="password"
+                              placeholder="패스워드를 입력하세요"
                               onFocus={e => this.setState({ lastnameFocus: true })}
                               onBlur={e => this.setState({ lastnameFocus: false })}
+                              onChange={this._passwordChange.bind(this)}
                             />
                           </InputGroup>
                         </CardBody>
@@ -113,7 +178,7 @@ class Login extends React.Component {
                             size="lg"
                             href="#pablo"
                             className="mb-3 btn-round"
-                          >
+                           onClick={this._loginStart}>
                             Get Started
                       </Button>
                           <div className="pull-left">
@@ -148,5 +213,7 @@ class Login extends React.Component {
     );
   }
 }
-
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  login: (adminId, password, history) => dispatch(loginAsync(adminId, password, history))
+});
+export default withRouter(connect(null, mapDispatchToProps)(Login));

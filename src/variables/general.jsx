@@ -79,32 +79,36 @@ const tasksRTL = [
 // // // table head data and table body data for Tables view
 // #############################
 
-const thead = ["Name", "Country", "City", "Salary"];
+//  8/31  상품등록 게시판으로 수정하기////////////////////////////////////////////////////////////
+const thead = ["상품명", "옵션1", "옵션2", "옵션3"];
 const tbody = [
   {
     className: "table-success",
-    data: ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"]
+    data: ["정말좋은이천쌀입니다정말좋은이천쌀입니다", "20Kg", "햅쌀", "₩50,000"]
   },
   {
     className: "",
-    data: ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"]
+    data: ["이천쌀", "20Kg", "햅쌀", "₩50,000"]
   },
   {
     className: "table-info",
-    data: ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"]
+    data: ["이천쌀", "20Kg", "햅쌀", "₩50,000"]
   },
   {
     className: "",
-    data: ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"]
+    data: ["이천쌀", "20Kg", "햅쌀", "₩50,000"]
   },
   {
     className: "table-danger",
-    data: ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"]
+    data: ["이천쌀", "20Kg", "햅쌀", "₩50,000"]
   },
-  { className: "", data: ["Mason Porter", "Chile", "Gloucester", "$78,615"] },
+  { 
+    className: "", 
+    data: ["이천쌀", "20Kg", "햅쌀", "₩50,000"]
+  },
   {
     className: "table-warning",
-    data: ["Jon Porter", "Portugal", "Gloucester", "$98,615"]
+    data: ["이천쌀", "20Kg", "햅쌀", "₩50,000"]
   }
 ];
 

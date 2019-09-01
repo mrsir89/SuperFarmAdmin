@@ -50,7 +50,7 @@ class RegularTables extends React.Component {
             <Col xs={12}>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Simple Table</CardTitle>
+                  <CardTitle tag="h4">상품등록용 게시판? 상품이미지, 제목, 옵션1,2,3</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Table responsive>
@@ -86,10 +86,10 @@ class RegularTables extends React.Component {
                     </tbody>
 
 
-                    {/* 8/27  */}
 
+
+                    {/* 8/27 Pagination */}
                     <div className="content">
-
                       <CardBody>
                         <Pagination>
                           <PaginationItem>

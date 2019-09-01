@@ -68,7 +68,8 @@ class Panels extends React.Component {
                 <CardHeader>
                   <CardTitle tag="h4">
                     Navigation Pills -{" "}
-                    <small className="description">Horizontal Tabs</small>
+                    <small className="description">Horizontal Tabs</small>  
+                    
                   </CardTitle>
                 </CardHeader>
                 <CardBody>

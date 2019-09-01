@@ -42,6 +42,7 @@ import PricingPage from "views/Pages/PricingPage.jsx";
 import LoginPage from "views/Pages/LoginPage.jsx";
 import RegisterPage from "views/Pages/RegisterPage.jsx";
 import LockScreenPage from "views/Pages/LockScreenPage.jsx";
+import RegProduct from 'views/Tables/RegProduct';
 
 let routes = [
   {
@@ -217,27 +218,18 @@ let routes = [
   //   views: [
       {
         path: "/regular-tables",
-        name: "Regular Tables",
+        name: "테이블",
         icon: "now-ui-icons files_single-copy-04",
         component: RegularTables,
         layout: "/admin"
-      // }////////////////////////////////////////////////////////////
-      // {
-      //   path: "/extended-tables",
-      //   name: "Extended Tables",
-      //   mini: "ET",
-      //   component: ExtendedTables,
-      //   layout: "/admin"
-      // },
-      // {
-      //   path: "/react-table",
-      //   name: "React Table",
-      //   mini: "RT",
-      //   component: ReactTable,
-      //   layout: "/admin"
-      // }
-    // ]
   },
+{
+  path: "/product",
+  name: "상 품 등 록",
+  icon: "now-ui-icons files_single-copy-04",
+  component: RegProduct,
+  layout: "/admin"
+},
   // {
   //   collapse: true,
   //   path: "/maps",
@@ -277,14 +269,14 @@ let routes = [
   // },
   {
     path: "/charts",
-    name: "Charts",
+    name: "통 계",
     icon: "now-ui-icons business_chart-pie-36",
     component: Charts,
     layout: "/admin"
   },
   {
     path: "/calendar",
-    name: "Calendar",
+    name: "달 력",
     icon: "now-ui-icons media-1_album",
     component: Calendar,
     layout: "/admin"

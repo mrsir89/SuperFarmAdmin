@@ -51,6 +51,7 @@ class FixedPlugin extends Component {
             {/* 8/27 주석처리 */}
             {/* <i className="fa fa-cog fa-2x" /> */}
           </div>
+          
             {/* 8/27 주석처리 */}
           {/* <ul className="dropdown-menu show">
             <li className="header-title">SIDEBAR BACKGROUND</li>
