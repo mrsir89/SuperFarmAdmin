@@ -1,3 +1,6 @@
+// 상품등록 관련
+// DB link
+
 import React from "react";
 
 // // reactstrap components
@@ -81,6 +84,8 @@ class RegProduct extends React.Component {
                 <div className="inputArea">
                   <label htmlFor="gdsName">상품명</label>
                   <input type="text" id="gdsName" name="gdsName" />
+                  <label htmlFor="gdsName">생산일</label>
+                  <input type="text" id="gdsName" name="gdsName" placeholder="년/월/일"/>
                 </div>
                 <div className="inputArea">
                   <label htmlFor="gdsPrice">상품그룹</label>
@@ -91,15 +96,21 @@ class RegProduct extends React.Component {
                 <div className="inputArea">
                   <label htmlFor="gdsPrice">원산지</label>
                   <input type="text" id="gdsPrice" name="gdsPrice" />
-                  <label htmlFor="gdsStock">단위</label>
-                  <input type="text" id="gdsStock" name="gdsStock" />
+                  <label htmlFor="gdsStock">단 위</label>
+                  <input type="text" id="gdsStock" name="gdsStock" placeholder="무게=kg / 수량=ea" />
                 </div>
                 <div className="inputArea">
-                  <label htmlFor="gdsPrice">옵션1</label>
+                  <label htmlFor="gdsPrice">옵션_1</label>
                   <input type="text" id="gdsPrice" name="gdsPrice" />
-                  <label htmlFor="gdsStock">옵션2</label>
+                  <label htmlFor="gdsStock">옵션_2</label>
                   <input type="text" id="gdsStock" name="gdsStock" />
                 </div>
+
+                <div className="inputArea">
+                  <label htmlFor="gdsPrice">가 격</label>
+                  <input type="text" id="gdsPrice" name="gdsPrice" placeholder="₩" />
+                </div>
+
 
                 <label>배송비</label>
                 <select className="category1">
@@ -109,9 +120,14 @@ class RegProduct extends React.Component {
 
 
 
+
                 <div className="inputArea">
                   <label htmlFor="gdsDes">상품설명</label>
                   <textarea rows={5} cols={50} id="gdsDes" name="gdsDes" defaultValue={""} />
+                </div>
+                <div className="inputArea">
+                  <label htmlFor="gdsName">Tag</label>
+                  <input type="text" id="gdsName" name="gdsName" placeholder="#"/>
                 </div>
                 <div className="image">
                   <label htmlFor="gdsDes">이미지 첨부</label>
