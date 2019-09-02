@@ -14,7 +14,10 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React from 'react';
+import { Actions } from '../../actions';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 // reactstrap components
 import {
@@ -41,7 +44,34 @@ import PanelHeader from "components/PanelHeader/PanelHeader.jsx";
 import { thead, tbody } from "variables/general";
 
 class RegularTables extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      productBoardNum:this.props
+    }
+    // this.handleClick=this.handleClick.bind(this);
+    console.log('여기 실행 되나?', this.state)
+  }
+
+
+  
+  componentWillMount() {
+    const { loadqnaboardList } = this.props;
+    console.log(this.state, ' <<<<< willMount')
+    let productNum = 5
+    let size = 10
+    let page = 1
+    console.log(loadqnaboardList, ' qnaboardList 실행')
+    loadqnaboardList(productNum, size, page);
+  }
+
+
   render() {
+    console.log(this.props, '<----- props')
+    const { qnaBoard } = this.props;
+    const { items } = qnaBoard;
+    console.log(items, ' <------- ')
+
     return (
       <>
         <PanelHeader size="sm" />
@@ -50,39 +80,56 @@ class RegularTables extends React.Component {
             <Col xs={12}>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Simple Table</CardTitle>
+                  <CardTitle tag="h4">QnA 목록</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Table responsive>
                     <thead className="text-primary">
                       <tr>
-                        {thead.map((prop, key) => {
-                          if (key === thead.length - 1)
-                            return (
-                              <th key={key} className="text-right">
-                                {prop}
-                              </th>
-                            );
-                          return <th key={key}>{prop}</th>;
-                        })}
+                        <th>productBoardNum</th>
+                        <th>제목</th>
+                        <th>작성일자</th>
+                        <th>답변 결과</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {tbody.map((prop, key) => {
+                    {items.map((item) => {
                         return (
-                          <tr key={key}>
-                            {prop.data.map((prop, key) => {
-                              if (key === thead.length - 1)
-                                return (
-                                  <td key={key} className="text-right">
-                                    {prop}
+                          <tr>
+
+                                  <td className="text-right">
+                                    {item.productBoardNum}
                                   </td>
-                                );
-                              return <td key={key}>{prop}</td>;
-                            })}
+                                  <td className="text-right">
+                                    {item.questionBoardTitle}
+                                  </td>
+                                  <td className="text-right">
+                                    {item.questionBoardRegDate}
+                                  </td>
+                                  <td className="text-right">
+                                    {item.userId}
+                                  </td>
+                                  <td className="text-right">
+                                    {item.questionBoardStatus}
+                                  </td>
                           </tr>
                         );
                       })}
+                      {/* {items.map((item, key) => {
+                        return (
+                          <tr key={key}>
+                            {item.map((item, key) => {
+                              if (key === thead.length - 1)
+                                return (
+                                  <td key={key} className="text-right">
+                                    {item}
+                                  </td>
+                                );
+                              return <td key={key}>{item}</td>;
+                            })}
+                          </tr>
+                        );
+                      })} */}
                     </tbody>
 
 
@@ -139,4 +186,23 @@ class RegularTables extends React.Component {
   }
 }
 
-export default RegularTables;
+const mapStateToProps=(state)=> {
+  console.log(state)
+  const { board } = state;
+  const { qnaBoard } = board;
+  // const { data } = qnaBoard;
+  console.log(qnaBoard, '<--------- qnaBoad')
+  console.log(board, ' <--------- product')
+  // console.log(data, '<------------ data')
+  return {
+    qnaBoard
+  };
+
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  loadqnaboardList: (productNum, size, page) => dispatch(Actions.loadqnaboardList(productNum, size, page))
+  //writeQnABoard: (qnaContent) => dispatch(writeQnABoard(qnaContent))
+});
+
+export default connect( mapStateToProps, mapDispatchToProps)(RegularTables);
