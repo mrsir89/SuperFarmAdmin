@@ -75,74 +75,147 @@ import ChartData from "chartData/ChartData.jsx"
 
 
 class Charts extends React.Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
-      chartData : ChartData(),
-      dataStandard : [
-         {name :"standard 1" , value: [10, 20, 30, 40, 530, 453, 380, 434, 568, 610, 700, 630]},
-         {name :"standard 2" , value: [50, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 630]},
-         {name :"standard 3" , value: [100, 0, 10, 550, 530, 453, 30, 434, 568, 40, 700, 630]},
-        
-      ]
+      chartData: ChartData(),
+      dataSet: {
+        data1 : [30, 40, 50, 60, 50, 40, 30, 40, 50, 60, 50, 40],
+        data2 : [10, 5, 100, 40, 70, 30, 10, 24, 44, 22, 10, 20]
+      },
+      year : 0,
+      month: 0,
+      Checked : [{"month": false, "daily": false}]
+      // isMonthChecked: false,
+      // isDailyChecked: false,
+
     }
     console.log('charts >> ', ChartData());
   }
 
   updateChart(e, index) {
     e.preventDefault();
-
-    const { dataStandard } = this.state;
-    const newValue = dataStandard[index].value;
-    console.log('updateChart >> ', ChartData(newValue));
+    const { dataSet } = this.state;
+    //const newValue = dataSet[index].value;
+    console.log('updateChart >> ', ChartData(dataSet));
 
     this.setState({
-      chartData: ChartData(newValue)
+      chartData: ChartData(dataSet)
     });
   }
 
+
+  // 검색버튼 누름  -> 해당 날짜의 판매 데이터 return 
+  handleSubmit(){
+    if(this.state.Checked[0].month === true){
+      // dispatch(action(this.state.year))
+      // .then(response => {this.setState(
+      //      dataSet : response.data
+      // )})
+      //
+    }
+  }
+
+  changeYearHandler=(e)=> {
+    let tmpCode = e.target.value
+    this.setState({
+      year : tmpCode
+    })
+  }
+
+  changeMonthHandler=(e) => {
+    let tmpCode = e.target.value
+    this.setState({
+      month : tmpCode
+    })
+  }
+
+  isChecked=(e)=>{
+    console.log("e.target.value",e.target.value )
+    if(e.target.value==="month"){
+      console.log("month 체크")
+      this.setState({
+        Checked : [{"month": true, "daily": false}]
+      })
+    } else if(e.target.value==="daily"){
+      console.log("daily 체크")
+      this.setState({
+        Checked : [{"month": false, "daily": true}]
+      })
+    }
+  }
   
+
   render() {
     const { chartData } = this.state;
+    console.log("state 변경 >>", this.state)
     return (
       <>
         <PanelHeader
           content={
             <div className="header text-center">
-              <h2 className="title">React Chartjs 2</h2>
-              <p className="category">
-                Simple yet flexible React charting for designers &amp;
-                developers. Made by our friends from{" "}
-                <a
-                  target="_blank"
-                  href="https://jerairrest.github.io/react-chartjs-2/"
-                >
-                  react-chartjs-2
-                </a>
-                , a react based wrapper over{" "}
-                <a target="_blank" href="https://www.chartjs.org">
-                  Chart.js
-                </a>
-                . Please check{" "}
-                <a
-                  target="_blank"
-                  href="https://github.com/jerairrest/react-chartjs-2"
-                >
-                  react-chartjs-2 documentation
-                </a>{" "}
-                and{" "}
-                <a target="_blank" href="https://www.chartjs.org/docs/latest/">
-                  Chart.js documentation
-                </a>{" "}
-                .
-              </p>
+              <h2 className="title"> 판매 통계 </h2>
             </div>
           }
         />
         <div className="content">
           <Row>
-            <Col xs={12} md={5} className="ml-auto">
-              <Card className="card-chart">
+            <Card className="card-chart">
+              <CardHeader>
+                <h5 className="card-category"></h5>
+                <CardTitle tag="h4">
+
+                </CardTitle>
+              </CardHeader>
+
+              {/* 8/29 버튼 추가 */}
+
+              <CardBody>
+                <div className="chart-area">
+                  <Bar data={chartData.data} options={chartData.options} />
+                </div>
+              </CardBody>
+              <CardFooter>
+                <div align="center">
+                  <label><input type="radio" name="date_type" value="month" onClick={this.isChecked} /> 월별</label>
+                  <label><input type="radio" name="date_type" value="daily" onClick={this.isChecked}/> 일별</label>
+          
+
+                  <select name="year" onChange={this.changeYearHandler}>
+                    <option value="">= 연도 선택 =</option>
+                    <option value="2019">2019 년</option>
+                    <option value="2018">2018 년</option>
+                    <option value="2017">2017 년</option>
+                  </select>
+
+                  
+                  <span class="scMonth" >
+                    <select name="month" onChange={this.changeMonthHandler}>
+                      <option value="">= 월 선택 =</option>
+                      <option value="1">1 월</option>
+                      <option value="2">2 월</option>
+                      <option value="3">3 월</option>
+                      <option value="4">4 월</option>
+                      <option value="5">5 월</option>
+                      <option value="6">6 월</option>
+                      <option value="7">7 월</option>
+                      <option value="8">8 월</option>
+                      <option value="9">9 월</option>
+                      <option value="10">10 월</option>
+                      <option value="11">11 월</option>
+                      <option value="12">12 월</option>
+                    </select>
+                  </span>
+
+                  <span><input type="submit" value="검색" onSubmit={e=> this.updateChart(e)} /></span>
+                </div>
+              </CardFooter>
+            </Card>
+          </Row>
+
+          {/* 표 */}
+          <Row>
+            {/* <Card className="card-chart">
                 <CardHeader>
                   <h5 className="card-category">Simple With Gradient</h5>
                   <CardTitle tag="h4">Line Chart</CardTitle>
@@ -155,7 +228,7 @@ class Charts extends React.Component {
                       <i className="now-ui-icons loader_gear" />
                     </DropdownToggle>
                     <DropdownMenu >
-                      {this.state.dataStandard.map((item,index) => {
+                      {this.state.dataSet.map((item,index) => {
                         return <DropdownItem onClick={e => this.updateChart(e, index)} key={index}>{item.name}</DropdownItem>
                       })}
                        
@@ -181,127 +254,7 @@ class Charts extends React.Component {
                     Updated
                   </div>
                 </CardFooter>
-              </Card>
-            </Col>
-            <Col xs={12} md={5} className="mr-auto">
-              <Card className="card-chart">
-                <CardHeader>
-                  <h5 className="card-category">With Numbers And Grid</h5>
-                  <CardTitle tag="h4">Line Chart 2</CardTitle>
-                  <UncontrolledDropdown>
-                    <DropdownToggle
-                      className="btn-round btn-icon"
-                      color="default"
-                      outline
-                    >
-                      <i className="now-ui-icons loader_gear" />
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem>Action</DropdownItem>
-                      <DropdownItem>Another Action</DropdownItem>
-                      <DropdownItem>Something else here</DropdownItem>
-                      <DropdownItem className="text-danger">
-                        Remove data
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                </CardHeader>
-                <CardBody>
-                  <div className="chart-area">
-                    {/* <Line
-                      data={chartsLine2.data}
-                      options={chartsLine2.options}
-                    /> */}
-                  </div>
-                </CardBody>
-                <CardFooter>
-                  <div className="stats">
-                    <i className="now-ui-icons arrows-1_refresh-69" /> Just
-                    Updated
-                  </div>
-                </CardFooter>
-              </Card>
-            </Col>
-          </Row>
-
-
-          <Row>
-            <Col xs={12} md={5} className="ml-auto">
-              <Card className="card-chart">
-                <CardHeader>
-                  <h5 className="card-category">
-                    Simple With Grids And Numbers
-                  </h5>
-                  <CardTitle tag="h4">Bar Chart</CardTitle>
-                  <UncontrolledDropdown>
-                    <DropdownToggle
-                      className="btn-round btn-icon"
-                      color="default"
-                      outline
-                    >
-                      <i className="now-ui-icons loader_gear" />
-                    </DropdownToggle>
-                    <DropdownMenu>
-                    {this.state.dataStandard.map((item,index) => {
-                        return <DropdownItem onClick={e => this.updateChart(e, index)} key={index}>{item.name}</DropdownItem>
-                      })}
-                      <DropdownItem className="text-danger">
-                        Remove data
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                </CardHeader>
-                <CardBody>
-                  <div className="chart-area">
-                    <Bar data={chartData.data}  options={chartData.data}  />
-                  </div>
-                </CardBody>
-                <CardFooter>
-                  <div className="stats">
-                    <i className="now-ui-icons ui-2_time-alarm" /> Last 7 days
-                  </div>
-                </CardFooter>
-              </Card>
-            </Col>
-
-
-
-
-            <Col xs={12} md={5} className="mr-auto">
-              <Card className="card-chart">
-                <CardHeader>
-                  <h5 className="card-category">Multiple Bars No Gradient</h5>
-                  <CardTitle tag="h4">Bar Chart 2</CardTitle>
-                  <UncontrolledDropdown>
-                    <DropdownToggle
-                      className="btn-round btn-icon"
-                      color="default"
-                      outline
-                    >
-                      <i className="now-ui-icons loader_gear" />
-                    </DropdownToggle>
-                    <DropdownMenu>
-                    {this.state.dataStandard.map((item,index) => {
-                        return <DropdownItem onClick={e => this.updateChart(e, index)} key={index}>{item.name}</DropdownItem>
-                      })}
-                      <DropdownItem className="text-danger">
-                        Remove data
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                </CardHeader>
-                <CardBody>
-                  <div className="chart-area">
-                    <Bar data={chartData.data} options={chartData.options} />
-                  </div>
-                </CardBody>
-                <CardFooter>
-                  <div className="stats">
-                    <i className="now-ui-icons ui-2_time-alarm" /> Last 7 days
-                  </div>
-                </CardFooter>
-              </Card>
-            </Col>
+              </Card> */}
           </Row>
         </div>
       </>

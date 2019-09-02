@@ -28,7 +28,7 @@
   border-radius: 0.1875rem;
   padding: 11px 22px;
   cursor: pointer;
-  background-color: #888;
+  background-color: #ffffff;
   color: #ffffff; }
   .btn:hover, .btn:focus, .btn:not(:disabled):not(.disabled):active, .btn:not(:disabled):not(.disabled).active, .btn:not(:disabled):not(.disabled):active:focus, .btn:not(:disabled):not(.disabled).active:focus, .btn:active:hover, .btn.active:hover,
   .show > .btn.dropdown-toggle,
@@ -1376,8 +1376,10 @@ a.text-gray:hover {
     .blockquote.blockquote-white small {
       color: rgba(255, 255, 255, 0.8); }
 
+      /* ///////////////////////////////////////////////////////// */
+   
 body {
-  color: #2c2c2c;
+  color: rgb(243, 243, 243);
   font-size: 14px;
   font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   -moz-osx-font-smoothing: grayscale;

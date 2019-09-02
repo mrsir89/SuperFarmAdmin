@@ -93,8 +93,12 @@
   options: {}
 }
 */
-const initialData = [10, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 630];
+// const initialData = [10, 480, 430, 550, 530, 453, 380, 434, 568, 610, 700, 630];
 
+const initialData = {
+      data1 : [30, 40, 50, 60, 50, 40, 30, 40, 50, 60, 50, 40],
+      data2 : [15, 20, 25, 30, 25, 20, 15, 20, 25, 30, 25, 20]
+    };
 function ChartData(chartData = initialData) {
 
   const chartsLine1 = {
@@ -234,27 +238,30 @@ function ChartData(chartData = initialData) {
   };
 
 //////////////////////////////////////////////////////////////////////////////
-
 const chartsBar2 = {
   data: {
     labels: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
+      "1월",
+      "2월",
+      "3월",
+      "4월",
+      "5월",
+      "6월",
+      "7월",
+      "8월",
+      "9월",
+      "10월",
+      "11월",
+      "12월"
     ],
     datasets: [
       {
         backgroundColor: "#f96332",
-        data: chartData
+        data: chartData.data1 //[40, 26, 28, 45, 20, 25, 30, 25, 20, 25, 20, 15]
+      },
+      {
+        backgroundColor: "#2CA8FF",
+        data: chartData.data2 //[15, 20, 25, 30, 25, 20, 15, 20, 25, 30, 25, 20]
       }
     ]
   },
@@ -304,7 +311,7 @@ const chartsBar2 = {
   }
 };
 
-  return chartsBar1;
+  return chartsBar2;
 }
 
  export default ChartData;
